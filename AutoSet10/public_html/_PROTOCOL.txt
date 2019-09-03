@@ -1,0 +1,90 @@
+Response Header
+{
+	"ResultCode" : int,
+	"ResultMsg" : "~~"
+
+	... ETC ...
+
+}
+
+
+/*---------------------------------------------
+Login.php
+	Request
+	{	
+		"id"		: "사용아이디", 
+		"password"	: "사용패스워드" 
+	}
+	Response
+	{
+		"ResultCode" : 결과코드 int,
+		"ResultMsg" : "결과 메시지",
+		"accountno"	: no,
+		"session"	: "세션키"
+	}
+password 는 hash('sha256' ... 으로 해쉬코드 저장.
+---------------------------------------------*/
+/*---------------------------------------------
+Register.php
+	Request
+	{	
+		"id"		: "사용아이디", 
+		"password"	: "사용패스워드" 
+	}
+	Response
+	{
+		"ResultCode" : 결과코드 int,
+		"ResultMsg" : "결과 메시지"
+	}
+---------------------------------------------*/
+/*---------------------------------------------
+Login.php
+	Request
+	{	
+		"accountno"		: "번호", 
+		"session"	: "세션키" 
+	}
+	Response
+	{
+		"ResultCode" : 결과코드 int,
+		"ResultMsg" : "결과 메시지",
+		"accountno"	: no,
+		"session"	: "세션키"
+	}
+---------------------------------------------*/
+/*---------------------------------------------
+StageClear.php
+	Request
+	{	
+		"accountno"	: bigint, 
+		"session"	: "세션", 
+		"stageid"	: stageid, 
+	}
+	Response
+	{
+		"ResultCode" : 결과코드 int,
+		"ResultMsg" : "결과 메시지",
+		"exp" : 경험치 (내 보유 경험치)
+		"level" : 레벨 (내 레벨)
+	}
+* data_stage 에 stageid 의 존재여부 확인
+* 유저의 클리어 여부 확인 후 경험치 지급
+* 레벨업 처리까지
+---------------------------------------------*/
+/*---------------------------------------------
+UserInfo.php
+	Request
+	{	
+		"accountno"	: bigint, 
+		"session"	: "세션", 
+	}
+	Response
+	{
+		"ResultCode" : 결과코드 int,
+		"ResultMsg" : "결과 메시지",
+		"exp" : 경험치
+		"level" : 레벨
+		
+		// "stageclear" : [1,2,3,4,5,6]
+	}
+---------------------------------------------*/
