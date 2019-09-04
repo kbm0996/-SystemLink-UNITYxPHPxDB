@@ -12,7 +12,7 @@
  그리고 규모가 지나치게 커지면 DB 작업 자체가 느려질 수 밖에 없기 때문에 서버를 분산해도 감당이 안된다. 이런 경우에는 샤딩(Sharding)으로 수평 파티셔닝(horizontal partitioning)을 한다던가, 리플리케이션(Replication; master-slave 구조) 구현하는 수 밖에 없다.  
  
 ## 💻 예제
- C++(send/recv msg) ↔ PHP(react msg, react db query) ↔ DB(react query) example with autoset10(php7.1)
+ Unity C#(send/recv msg) ↔ PHP(react msg, react db query) ↔ DB(react query) example with autoset10(php7.1)
 
   ![capture](https://github.com/kbm0996/-SystemLink-CPPxPHPxDB/blob/master/jpg/figure1.png)
   
@@ -29,7 +29,7 @@
 
 ### 1. C# 파트
 
-**📋 NetWWW.cs** : 컴포넌트(Component; Class that inherit the Mobobehaviour class), 코루틴(Coroutine)
+**📋 NetWWW.cs** : 로그인, 회원가입, 세션 갱신 등 버튼 GUI를 포함한 컴포넌트(Component; Class that inherit the Mobobehaviour class), 코루틴(Coroutine)
 
 ### 2. PHP 파트
 
