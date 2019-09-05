@@ -1,7 +1,7 @@
 # 시스템 연동 - UNITY+PHP+DB
 ## 📢 개요
 
- ![capture](https://github.com/kbm0996/-SystemLink-CPPxPHPxDB/blob/master/jpg/figure0.png)
+ ![capture](https://github.com/kbm0996/-SystemLink-UNITYxPHPxDB/blob/master/JPG/figure0.png)
 
  Unity와 PHP<sup id="1">[1](#footnote1)</sup>, PHP와 MySQL<sup id="2">[2](#footnote2)</sup>(이하 DB) 간의 통신으로 시스템 연동하는 예제이다. C++는 PHP에 어떤 데이터를 JSON 형태로 PHP에 전송하고, PHP는 그 데이터를 쿼리문으로 만들어 DB에 전달하고 작동한다. 그 다음엔 결과를 DB가 PHP로 전송하고, PHP에서는 JSON 형태로 C++ 애플리케이션에 전달한다. 
 
@@ -21,7 +21,7 @@
 
 ## 📐 구조 및 작동 순서
 
-  ![capture](https://github.com/kbm0996/-SystemLink-CPPxPHPxDB/blob/master/jpg/figure2.PNG)
+  ![capture](https://github.com/kbm0996/-SystemLink-UNITYxPHPxDB/blob/master/JPG/figure1.PNG)
   
   **figure 2. Structure*
   
