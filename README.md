@@ -10,20 +10,12 @@
  단, 서버를 분산하면 네트워크 통신을 해야하기 때문에 네트워크 지연 시간이 발생한다. 따라서 DB서버와 통신하는 서버 간의 물리적인 거리가 너무 멀어서는 안된다.
 
  그리고 규모가 지나치게 커지면 DB 작업 자체가 느려질 수 밖에 없기 때문에 서버를 분산해도 감당이 안된다. 이런 경우에는 샤딩(Sharding)으로 수평 파티셔닝(horizontal partitioning)을 한다던가, 리플리케이션(Replication; master-slave 구조) 구현하는 수 밖에 없다.  
- 
-## 💻 예제
- Unity C#(send/recv msg) ↔ PHP(react msg, react db query) ↔ DB(react query) example with autoset10(php7.1)
 
-  ![capture](https://github.com/kbm0996/-SystemLink-CPPxPHPxDB/blob/master/jpg/figure1.png)
-  
-  **figure 1. Run Result*
-
-
-## 📐 구조 및 작동 순서
+## 📐 구조
 
   ![capture](https://github.com/kbm0996/-SystemLink-UNITYxPHPxDB/blob/master/JPG/figure1.PNG)
   
-  **figure 2. Structure*
+  **figure 1. Structure*
   
 ## 📑 구성
 
@@ -31,47 +23,11 @@
 
 **📋 NetWWW.cs** : 로그인, 회원가입, 세션 갱신 등 버튼 GUI를 포함한 컴포넌트(Component; Class that inherit the Mobobehaviour class), 코루틴(Coroutine)
 
+자세한 내용은 하위 디렉터리 참조
+
 ### 2. PHP 파트
 
-#### 📂 Home Directory
-
-> **📋 _Config_DB.php** : DB 설정값, LOG 전송 URL, LOG 수준, 프로파일링 확률 
->
-> **📋 _Startup.php** : 각종 페이지의 첫 부분. 주요 라이브러리 인클루드, 각종 함수 및 변수 초기화
->
-> **📋 Register.php** : 회원 가입 요청 및 응답(POST 메시지, JSON 포맷) 페이지 (C++ ↔ **PHP** ↔ DB) 
->
-> **📋 Login.php** : 로그인 요청 및 응답(POST 메시지, JSON 포맷) 페이지 (C++ ↔ **PHP** ↔ DB) 
->
-> **📋 Session.phpp** : 세션 갱신(POST 메시지, JSON 포맷) 페이지 (PHP\[Login.php, Session.php\] ↔ **PHP** ↔ DB)
->
-> **📋 StageClear.php** : 스테이지 클리어 정보 요청 및 응답 페이지 (C++ ↔ **PHP** ↔ DB) 
->
-> **📋 UserInfo.php** : 유저 정보 조회 요청 및 응답 페이지 (C++ ↔ **PHP** ↔ DB) 
->
-> **📋 _Cleanup.php** : 각종 페이지의 끝 부분. DB 연결 해제, 로그 저장, 프로파일러 로그 저장
->
->#### 📂 _SQL : 테이블 최초 생성용 sql
->>
->> 📋 game_db.sql, 📋 log_db.sql
->>
->#### 📂 _LIB : 라이브러리 폴더
->>
->> **📋 _ResultCode.php**
->>
->> **📋 lib_Call.php** : Curl 관련 함수
->>
->> **📋 lib_DB.php** : 실질적으로 DB에 Query를 날리는 함수
->>
->> **📋 lib_Key.php** : sha256 인코딩 함수
->>
->> 📋 lib_ErrorHandler.php, 📋 lib_Log.php, 📋 lib_Profiling.php : 디버깅 관련 함수
->>
->#### 📂 _LIB : 실질적으로 로그를 DB에 저장시키는 함수
->>
->> **📋 _Config_LOG.php** : DB 관련 글로벌 변수
->>
->> 📋 LogGame.php.php, 📋 LogProfiling.php, 📋 LogSystem.php : 종류별 로그 날리는 페이지
+[-SystemLink-CPPxPHPxDB](https://github.com/kbm0996/-SystemLink-CPPxPHPxDB)의 PHP 파트와 동일
 
 ---
 
