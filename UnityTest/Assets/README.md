@@ -1,65 +1,29 @@
-# 시스템 연동 - CPP+PHP+DB
-
-## 📐 구조 및 작동 순서
-
+# 유니티 C# 파트
+## ➡ 이벤트 함수
   ![Script_Lifecycle_Flowchart](https://github.com/kbm0996/-SystemLink-UNITYxPHPxDB/blob/master/JPG/Script_Lifecycle_Flowchart.png)
   
   **figure 1. Unity Script Lifecycle Flowchart*
   
+**- __Awake()** : 초기화. Start() 함수의 이전 및 프리팹의 인스턴스화 직후에 호출. Start()와 달리 게임 오브젝트가 비활성화 상태라도 호출
+
+**- __OnGUI()** : GUI 이벤트에 따라 프레임마다 여러 차례 호출. 레이아웃 및 리페인트 이벤트가 먼저 처리된 후 레이아웃 및 키보드 / 마우스 이벤트가 각 입력 이벤트에 대해 처리
+
+**- 기타 이벤트 함수** : [유니티 매뉴얼](https://docs.unity3d.com/kr/530/Manual/ExecutionOrder.html) 참고
+  
+## 🔄 코루틴
+Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작할 수 있는 여러 진입점을 허용하는 `함수`
+동시 실행 루틴이라 부르나, 실제로는 두 가지 흐름을 병렬로 수행하는 것이 아니라 하나의 흐름을 기억했다가 수행
+
+**- 작동 원리** : 코루틴(Coroutine)은 `단일쓰레드`지만 코루틴을 사용하여 `멀티쓰레드`처럼 작동. Update() 호출 시 yield return 할 코루틴이 있는지 확인
+
+**- 스레드와의 차이점** 
+
+- 스레드는 선점형(Preemptive), 코루틴은 비선점형(Non-Premmptive)
+
+- 스레드는 OS가 스케줄링, 코루틴은 유저레벨 스레드
+
+- 멀티스레드는 스레드가 2개 이상, 코루틴은 단일스레드
+
   ![Unity_One_Frame](https://github.com/kbm0996/-SystemLink-UNITYxPHPxDB/blob/master/JPG/Unity_One_Frame.jpg)
   
   **figure 2. Unity One Frame*
-  
-## 📑 구성
-
-### 1. C++ 파트
-
-**📋 _CallHttp.h/cpp** : UTF8↔UTF16 변환 함수, Domain↔IP 변환 함수, Http GET/POST 메세지 보내기 및 받기 함수
-
-### 2. PHP 파트
-
-#### 📂 Home Directory
-
-> **📋 _Config_DB.php** : DB 설정값, LOG 전송 URL, LOG 수준, 프로파일링 확률 
->
-> **📋 _Startup.php** : 각종 페이지의 첫 부분. 주요 라이브러리 인클루드, 각종 함수 및 변수 초기화
->
-> **📋 Register.php** : 회원 가입 요청 및 응답(POST 메시지, JSON 포맷) 페이지 (C++ ↔ **PHP** ↔ DB) 
->
-> **📋 Login.php** : 로그인 요청 및 응답(POST 메시지, JSON 포맷) 페이지 (C++ ↔ **PHP** ↔ DB) 
->
-> **📋 Session.phpp** : 세션 갱신(POST 메시지, JSON 포맷) 페이지 (PHP\[Login.php, Session.php\] ↔ **PHP** ↔ DB)
->
-> **📋 StageClear.php** : 스테이지 클리어 정보 요청 및 응답 페이지 (C++ ↔ **PHP** ↔ DB) 
->
-> **📋 UserInfo.php** : 유저 정보 조회 요청 및 응답 페이지 (C++ ↔ **PHP** ↔ DB) 
->
-> **📋 _Cleanup.php** : 각종 페이지의 끝 부분. DB 연결 해제, 로그 저장, 프로파일러 로그 저장
->
->#### 📂 _SQL : 테이블 최초 생성용 sql
->>
->> 📋 game_db.sql, 📋 log_db.sql
->>
->#### 📂 _LIB : 라이브러리 폴더
->>
->> **📋 _ResultCode.php**
->>
->> **📋 lib_Call.php** : Curl 관련 함수
->>
->> **📋 lib_DB.php** : 실질적으로 DB에 Query를 날리는 함수
->>
->> **📋 lib_Key.php** : sha256 인코딩 함수
->>
->> 📋 lib_ErrorHandler.php, 📋 lib_Log.php, 📋 lib_Profiling.php : 디버깅 관련 함수
->>
->#### 📂 _LIB : 실질적으로 로그를 DB에 저장시키는 함수
->>
->> **📋 _Config_LOG.php** : DB 관련 글로벌 변수
->>
->> 📋 LogGame.php.php, 📋 LogProfiling.php, 📋 LogSystem.php : 종류별 로그 날리는 페이지
-
----
-
-<sup><b id="footnote1">[1](#1)</b></sup> PHP(PHP: Hypertext Preprocessor). 프로그래밍 언어의 일종. 대표적인 서버 사이드 스크립트 언어로 웹 개발에 특화된 언어
-
-<sup><b id="footnote2">[2](#2)</b></sup> MySQL. 오픈 소스 관계형 데이터베이스 관리 시스템(RDBMS)의 일종
