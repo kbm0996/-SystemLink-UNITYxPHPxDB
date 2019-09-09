@@ -181,7 +181,8 @@ Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작�
             else
             {
                 // 웹페이지 측에서 요청 처리 실패 
-                Debug.Log("RESPONSE : url:" + SendData.URL() + " | ResultCode:" + ResultCode + " | ResultMsg:" + ResultMsg);
+                Debug.Log("RESPONSE : url:" + SendData.URL() + " | ResultCode:" + ResultCode + " 
+                          | ResultMsg:" + ResultMsg);
                 MessageBox(ResultMsg);
             }
         }
