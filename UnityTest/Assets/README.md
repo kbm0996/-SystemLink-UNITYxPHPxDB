@@ -152,14 +152,14 @@ Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작�
         // 응답 처리
         //
         //-----------------------------------------------------
-        Response(SendData, (www.error != null));    // www.error 값이 null이면 true, null이 아니면 false
+        Response(SendData, (www.error != null));    // www.error이 null이면 true, 아니면 false
         if (www.error == null)
         {
             //-----------------------------------------------------
             // Json 데이터 파싱
             //
             //-----------------------------------------------------
-            /* TODO: !!주의!! php측에서 UTF8 + BOM 코드로 인코딩된 다른 php를 include할 경우 에러 발생 */
+            /* !!주의!! php측에서 UTF8 + BOM 코드로 인코딩된 다른 php를 include할 경우 에러 발생 */
             JsonData JsonResponse = JsonMapper.ToObject(www.text);
 
             //-----------------------------------------------------
@@ -181,8 +181,6 @@ Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작�
             else
             {
                 // 웹페이지 측에서 요청 처리 실패 
-                Debug.Log("RESPONSE : url:" + SendData.URL() + " | ResultCode:" + ResultCode + " 
-                          | ResultMsg:" + ResultMsg);
                 MessageBox(ResultMsg);
             }
         }
