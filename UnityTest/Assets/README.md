@@ -39,11 +39,11 @@ Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작�
         UTF8Encoding utf8 = new UTF8Encoding();
         byte[] JsonBytes = utf8.GetBytes(JSONStr);
 
-        // TODO: [Unity Script] WWW 클래스; URL에 메세지를 보내고, 컨텐츠를 받아오는 유틸리티 모듈
-        // * 요약 : 지정한 URL에 데이터를 POST 형식으로 Request를 보내고 그 컨텐츠를 받아옴. 
+        // TODO: [Unity Script] WWW 클래스; URL에 메세지를 보내고, 컨텐츠를 받아오는 유틸리티
+        // * 요약 : 지정한 URL에 데이터를 POST 형식으로 Request를 보내고 그 컨텐츠를 받아옴
         //        JSON으로 보낸 메시지이므로 웹페이지에서 JSON으로 받는 경우에만 작동
-        // * 반환값 : 새로운 WWW 오브젝트(복사가 일어남). 컨텐츠 다운로드 완료시, 생성된 오브젝트로부터 
-        //          그 결과를 가져올 수 있다(fetch)
+        // * 반환값 : 새로운 WWW 오브젝트(복사가 일어남). 컨텐츠 다운로드 완료 시, 
+        //          생성된 오브젝트로부터 그 결과를 가져올 수 있다(fetch)
         // * 문제점 : 웹 요청에 대한 반응이 바로 오지 않아서 일시적으로 유니티가 멈춤
         //          (=WWW를 OnClick으로 구현하면 안되는 이유!)
         //          -> 코루틴으로 빠져서 웹 처리를 하도록 해야함
@@ -51,7 +51,7 @@ Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작�
 
         // * yield return : 현 상태 저장 후 리턴
         // * yield break : Iteration 루프 탈출
-        yield return www;                     // 첫번째 루프에서 리턴. 매 루프마다 www가 리턴했는지 확인
+        yield return www;  // 첫번째 루프에서 리턴. 매 루프마다 www가 리턴했는지 확인
         Debug.Log("RESPONSE : " + www.text);  // www 리턴 후 실행
     }
 ```
@@ -104,7 +104,6 @@ Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작�
 
         //-----------------------------------------------------
         // SendData 클래스를 JSON 형식으로 변환
-        //
         //-----------------------------------------------------
         UTF8Encoding utf8 = new UTF8Encoding();   // 유니코드 문자의 UTF-8 인코딩
 
@@ -113,7 +112,6 @@ Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작�
 
         //-----------------------------------------------------
         // JSON 데이터 전송 및 결과 컨텐츠 수신
-        //
         //-----------------------------------------------------
         // WWW 클래스 인자로 문자열 전달 불가능(포인터도, 메모리도 접근 불가능)
         // 따라서, String을 Byte로 Convert
@@ -132,32 +130,15 @@ Yield Process. 특정 위치에서 실행을 일시 중단하고 다시 시작�
         // * yield return : 현 상태 저장 후 리턴
         // * yield break : Iteration 루프 탈출
         yield return www;   // 답이 오지 않으면 계속 돌면서 답이 왔는지 검사
-
-        //////////////////////////////////////////////////////////////////////
-        // * 작동 방식 예 :
-        //public IEnumerator Call()   
-        //{
-        //    string JSONStr = JsonMapper.ToJson(this);
-        //    UTF8Encoding utf8 = new UTF8Encoding();
-        //    byte[] JsonBytes = utf8.GetBytes(JSONStr);
-        //
-        //    WWW www = new WWW(szPath, JsonBytes);
-        //
-        //    yield return www;                     // 첫번째 루프에서 리턴
-        //    Debug.Log("RESPONSE : " + www.text);  // 두번째 루프에서 실행
-        //}
-        //////////////////////////////////////////////////////////////////////
-
+        
         //-----------------------------------------------------
         // 응답 처리
-        //
         //-----------------------------------------------------
         Response(SendData, (www.error != null));    // www.error이 null이면 true, 아니면 false
         if (www.error == null)
         {
             //-----------------------------------------------------
             // Json 데이터 파싱
-            //
             //-----------------------------------------------------
             /* !!주의!! php측에서 UTF8 + BOM 코드로 인코딩된 다른 php를 include할 경우 에러 발생 */
             JsonData JsonResponse = JsonMapper.ToObject(www.text);
